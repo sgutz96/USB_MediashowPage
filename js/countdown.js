@@ -4,7 +4,7 @@
 
 (function () {
   /* === FECHA DEL EVENTO — editar aquí === */
-  var REAL_EVENT_DATE = new Date('2025-05-04T10:00:00');
+  var REAL_EVENT_DATE = new Date('2026-05-04T10:00:00');
   /* ======================================= */
 
   var overlay  = document.getElementById('coming-soon');
