@@ -1,0 +1,24 @@
+/* ══════════════════════════════════
+   RESPONSIVE.CSS
+   ══════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .nav-links { display: none; }
+}
+
+@media (max-width: 700px) {
+  #aliados-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(6,1fr); }
+  #aliados-scene { height: 520px; }
+}
+
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .agenda-item { grid-template-columns: 80px 1px 1fr; }
+}
+
+@media (max-width: 500px) {
+  .cs-unit { min-width: 68px; padding: 0.8rem 0.8rem; }
+  .cs-sep  { font-size: 1.4rem; margin-bottom: 1.1rem; }
+}

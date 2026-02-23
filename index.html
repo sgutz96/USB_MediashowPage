@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Show 2026-1</title>
+
+<script src="js/config.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lil-gui@0.19/dist/lil-gui.min.css">
+<script src="https://cdn.jsdelivr.net/npm/lil-gui@0.19/dist/lil-gui.umd.min.js"></script>
+
+<link rel="stylesheet" href="css/general.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/coming-soon.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     COMING SOON OVERLAY
+     EVENT_DATE: 4 de mayo 2026, 10:00am
+     Cambia REAL_EVENT_DATE en js/countdown.js
+════════════════════════════════════════ -->
+<div id="coming-soon">
+  <canvas id="cs-canvas"></canvas>
+
+  <div id="cs-content">
+    <div id="cs-logo">MEDIA<span>SHOW</span></div>
+    <div id="cs-edition">// 2026 · Primer Semestre</div>
+
+    <h1 id="cs-title">El escenario donde<br>la innovación <em>sucede</em></h1>
+
+    <div id="cs-date-label">El evento comienza en</div>
+
+    <div id="cs-countdown">
+      <div class="cs-unit">
+        <span class="cs-num" id="cs-days">00</span>
+        <span class="cs-lbl">días</span>
+      </div>
+      <div class="cs-sep">:</div>
+      <div class="cs-unit">
+        <span class="cs-num" id="cs-hours">00</span>
+        <span class="cs-lbl">horas</span>
+      </div>
+      <div class="cs-sep">:</div>
+      <div class="cs-unit">
+        <span class="cs-num" id="cs-mins">00</span>
+        <span class="cs-lbl">minutos</span>
+      </div>
+      <div class="cs-sep">:</div>
+      <div class="cs-unit">
+        <span class="cs-num" id="cs-secs">00</span>
+        <span class="cs-lbl">segundos</span>
+      </div>
+    </div>
+
+    <div id="cs-event-info">
+      <span>4 &amp; 5 de Mayo · 10:00 am – 5:00 pm</span>
+      <span class="cs-dot">·</span>
+      <span>Bogotá, Colombia</span>
+    </div>
+
+    <div id="cs-actions">
+      <a href="#" id="cs-btn-register" class="cs-btn-primary">
+        <span>Registrarme ahora</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div id="cs-footer-line">
+      <span>© 2026 Media Show</span>
+      <span class="cs-dot">·</span>
+      <span>Todos los derechos reservados</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN SITE (oculto hasta que sea la fecha del evento) -->
+<div id="main-site" style="display:none;">
+
+<!-- NAV -->
+<nav>
+  <a href="#banner" class="nav-logo">MEDIA<span>SHOW</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#agenda">Agenda</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#aliados">Aliados</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Inscríbete</a>
+</nav>
+
+<!-- BANNER / HERO -->
+<section id="banner">
+  <canvas id="three-canvas"></canvas>
+
+  <span class="code-deco" style="top:20%;left:3%;opacity:0.5;z-index:2;position:absolute;">const event = { year: 2026, edition: 'v1.0' };</span>
+  <span class="code-deco" style="bottom:30%;right:3%;opacity:0.4;z-index:2;position:absolute;">await launchProject(innovation);</span>
+
+  <div class="hero-content">
+    <div class="hero-badge">// En vivo · 2026 · Primer Semestre</div>
+
+    <h1 class="hero-title">
+      <span class="line1">MEDIA</span>
+      <span class="line2">SHOW</span>
+      <span class="line3">2026-1</span>
+    </h1>
+
+    <p class="hero-sub">
+      El escenario donde proyectos disruptivos se encuentran<br>
+      con quienes tienen el poder de hacerlos realidad.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+      <a href="#agenda" class="btn-secondary">Ver agenda</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Categorías</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">40+</span>
+        <span class="stat-label">Proyectos</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">20+</span>
+        <span class="stat-label">Aliados</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1K+</span>
+        <span class="stat-label">Asistentes</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-line" style="z-index:2;position:absolute;">
+    <span>Scroll</span>
+    <div class="scroll-line-bar"></div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/three-hero.js"></script>
+
+<!-- PANEL EDITOR — lil-gui -->
+<style>
+  .lil-gui {
+    --background-color: rgba(8,12,16,0.97) !important;
+    --text-color: #E8EDF2 !important;
+    --title-background-color: rgba(242,145,27,0.15) !important;
+    --title-text-color: #F2911B !important;
+    --widget-color: #0D1117 !important;
+    --hover-color: rgba(4,191,191,0.15) !important;
+    --focus-color: rgba(242,145,27,0.3) !important;
+    --number-color: #04BFBF !important;
+    --string-color: #F2911B !important;
+    --font-family: 'JetBrains Mono', monospace !important;
+    --font-size: 11px !important;
+    --input-font-size: 11px !important;
+    --folder-indent: 8px !important;
+    border: 1px solid rgba(242,145,27,0.3) !important;
+    backdrop-filter: blur(20px) !important;
+    z-index: 99998 !important;
+  }
+  .lil-gui .title {
+    letter-spacing: 0.1em !important;
+    font-weight: 700 !important;
+    border-bottom: 1px solid rgba(242,145,27,0.2) !important;
+  }
+  .lil-gui .controller.color .display { border-radius: 0 !important; }
+  #gui-toggle-btn {
+    position: fixed;
+    bottom: 1.5rem; left: 1.5rem;
+    z-index: 99999;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(4,191,191,0.12);
+    border: 1px solid rgba(4,191,191,0.4);
+    color: #04BFBF; padding: 0.45rem 1rem;
+    cursor: pointer; transition: all 0.2s; user-select: none;
+  }
+  #gui-toggle-btn:hover { background: rgba(4,191,191,0.25); color: #fff; }
+  .lil-gui.root {
+    position: fixed !important;
+    bottom: 4rem !important; left: 1.5rem !important;
+    top: auto !important; right: auto !important;
+    max-height: calc(100vh - 6rem) !important;
+    overflow-y: auto !important;
+  }
+</style>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <div class="section-label">01 // Sobre el evento</div>
+      <h2 class="section-title">Donde la <br><span style="color:var(--primary)">innovación</span><br>tiene voz</h2>
+      <p>Media Show es el evento semestral que reúne a los <strong>proyectos más prometedores</strong> del ecosistema emprendedor tech de la región, conectándolos con aliados, inversores y comunidades que potencian su impacto.</p>
+      <p>Durante un día intenso, los equipos seleccionados presentan sus soluciones ante un jurado experto y una audiencia comprometida con el <strong>futuro de la tecnología.</strong></p>
+      <a href="#proyectos" class="btn-secondary" style="margin-top:1.5rem;display:inline-block;">Explorar proyectos</a>
+    </div>
+    <div class="about-visual fade-up">
+      <div class="video-wrapper">
+        <div class="video-corner tl"></div>
+        <div class="video-corner tr"></div>
+        <div class="video-corner bl"></div>
+        <div class="video-corner br"></div>
+        <iframe
+          src="https://www.youtube.com/embed/HfHC0wNYry8?rel=0&modestbranding=1&color=white"
+          title="Media Show 2026-1 — Teaser"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="section-label fade-up">02 // Programa</div>
+    <h2 class="section-title fade-up">Agenda de <span style="color:var(--secondary)">los días</span></h2>
+
+    <div class="day-tabs fade-up">
+      <button class="day-tab active" onclick="showDay(1, this)">
+        <span class="day-tab-num">DÍA 01</span>
+        <span class="day-tab-date">4 de mayo</span>
+      </button>
+      <button class="day-tab" onclick="showDay(2, this)">
+        <span class="day-tab-num">DÍA 02</span>
+        <span class="day-tab-date">5 de mayo</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- DÍA 1 -->
+  <div class="agenda-wrap" id="agenda-day1">
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">10:00</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Apertura</div>
+        <div class="agenda-name">Registro y bienvenida</div>
+        <div class="agenda-speaker">Equipo organizador · Lobby principal</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">10:30</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Conferencia</div>
+        <div class="agenda-name">Apertura oficial Media Show 2026-1</div>
+        <div class="agenda-speaker">Dirección académica · Auditorio central</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">11:00</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Presentaciones</div>
+        <div class="agenda-name">Ronda de proyectos — HealthTech & EdTech</div>
+        <div class="agenda-speaker">Jurado categorías · Sala A y B</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">12:30</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Pausa</div>
+        <div class="agenda-name">Almuerzo y networking</div>
+        <div class="agenda-speaker">Área de networking · Piso 2</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">13:30</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Presentaciones</div>
+        <div class="agenda-name">Ronda de proyectos — GreenTech & FinTech</div>
+        <div class="agenda-speaker">Jurado categorías · Salas C y D</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">15:30</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Panel</div>
+        <div class="agenda-name">Conversatorio: Innovación e impacto social</div>
+        <div class="agenda-speaker">Aliados & ponentes · Auditorio central</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">17:00</div>
+      <div class="agenda-line agenda-line--end"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Cierre</div>
+        <div class="agenda-name">Cierre Día 1 — Reflexiones y anuncios</div>
+        <div class="agenda-speaker">Todos · Auditorio central</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DÍA 2 -->
+  <div class="agenda-wrap" id="agenda-day2" style="display:none;">
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">10:00</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Apertura</div>
+        <div class="agenda-name">Bienvenida Día 2 & recap</div>
+        <div class="agenda-speaker">Equipo organizador · Auditorio central</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">10:30</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Presentaciones</div>
+        <div class="agenda-name">Ronda de proyectos — Smart Cities</div>
+        <div class="agenda-speaker">Jurado categorías · Sala E</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">12:00</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Pausa</div>
+        <div class="agenda-name">Almuerzo y espacio libre</div>
+        <div class="agenda-speaker">Área de networking · Piso 2</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">13:00</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Deliberación</div>
+        <div class="agenda-name">Evaluación final del jurado</div>
+        <div class="agenda-speaker">Jurado · Sala privada</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">14:30</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Especial</div>
+        <div class="agenda-name">Keynote: Tendencias tech 2026</div>
+        <div class="agenda-speaker">Speaker invitado · Auditorio central</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">16:00</div>
+      <div class="agenda-line"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Premiación</div>
+        <div class="agenda-name">Ceremonia de premiación — Ganadores por categoría</div>
+        <div class="agenda-speaker">Todos · Auditorio central</div>
+      </div>
+    </div>
+    <div class="agenda-item fade-up">
+      <div class="agenda-time">17:00</div>
+      <div class="agenda-line agenda-line--end"></div>
+      <div class="agenda-info">
+        <div class="agenda-tag">Clausura</div>
+        <div class="agenda-name">Cierre oficial Media Show 2026-1</div>
+        <div class="agenda-speaker">Todos · Auditorio central</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <div class="proyectos-header">
+    <div class="section-label fade-up">03 // Seleccionados</div>
+    <h2 class="section-title fade-up">Proyectos <span style="color:var(--primary)">seleccionados</span></h2>
+    <p class="fade-up" style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;letter-spacing:0.03em;">Selecciona una categoría para explorar los proyectos</p>
+
+    <div class="categorias-tabs fade-up">
+      <button class="cat-tab active" onclick="showCat('healthtech', this)">HealthTech</button>
+      <button class="cat-tab" onclick="showCat('edtech', this)">EdTech</button>
+      <button class="cat-tab" onclick="showCat('greentech', this)">GreenTech</button>
+      <button class="cat-tab" onclick="showCat('fintech', this)">FinTech</button>
+      <button class="cat-tab" onclick="showCat('smartcities', this)">Smart Cities</button>
+    </div>
+  </div>
+
+  <!-- HealthTech -->
+  <div id="cat-healthtech" class="categoria-section active">
+    <div class="cat-title">HealthTech</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="carousel-healthtech">
+        <div class="project-card"><div class="project-num">// HT-001</div><div class="project-img">🧬</div><div class="project-name">BioScan AI</div><div class="project-desc">Diagnóstico temprano de enfermedades crónicas mediante análisis de imágenes médicas con inteligencia artificial.</div><div class="project-tags"><span class="project-tag">AI/ML</span><span class="project-tag">Diagnóstico</span></div></div>
+        <div class="project-card"><div class="project-num">// HT-002</div><div class="project-img">💊</div><div class="project-name">MedTrack</div><div class="project-desc">Plataforma de adherencia a tratamientos con recordatorios inteligentes y seguimiento en tiempo real.</div><div class="project-tags"><span class="project-tag">IoT</span><span class="project-tag">Mobile</span></div></div>
+        <div class="project-card"><div class="project-num">// HT-003</div><div class="project-img">🫀</div><div class="project-name">HeartWatch</div><div class="project-desc">Monitor cardiaco portátil con alertas predictivas basadas en modelos de machine learning.</div><div class="project-tags"><span class="project-tag">Wearable</span><span class="project-tag">Salud</span></div></div>
+        <div class="project-card"><div class="project-num">// HT-004</div><div class="project-img">🏥</div><div class="project-name">Cliniq</div><div class="project-desc">Sistema de gestión hospitalaria descentralizado que optimiza recursos y reduce tiempos de espera.</div><div class="project-tags"><span class="project-tag">Blockchain</span><span class="project-tag">SaaS</span></div></div>
+        <div class="project-card"><div class="project-num">// HT-005</div><div class="project-img">🧠</div><div class="project-name">MindBridge</div><div class="project-desc">Aplicación de salud mental con terapia cognitivo-conductual asistida por IA y acompañamiento humano.</div><div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Mental Health</span></div></div>
+      </div>
+      <div class="carousel-nav">
+        <button class="car-btn" onclick="scrollCar('carousel-healthtech', -1)">←</button>
+        <button class="car-btn" onclick="scrollCar('carousel-healthtech', 1)">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EdTech -->
+  <div id="cat-edtech" class="categoria-section">
+    <div class="cat-title">EdTech</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="carousel-edtech">
+        <div class="project-card"><div class="project-num">// ET-001</div><div class="project-img">📚</div><div class="project-name">LearnFlow</div><div class="project-desc">Plataforma de aprendizaje adaptativo que personaliza el currículo según el ritmo y estilo de cada estudiante.</div><div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Educación</span></div></div>
+        <div class="project-card"><div class="project-num">// ET-002</div><div class="project-img">🎮</div><div class="project-name">CodeKids</div><div class="project-desc">Videojuego educativo que enseña programación a niños de 6-12 años mediante mecánicas de puzzle y aventura.</div><div class="project-tags"><span class="project-tag">Gamification</span><span class="project-tag">Kids</span></div></div>
+        <div class="project-card"><div class="project-num">// ET-003</div><div class="project-img">🌍</div><div class="project-name">GlobalClass</div><div class="project-desc">Conecta aulas rurales con mentores internacionales mediante sesiones interactivas de realidad aumentada.</div><div class="project-tags"><span class="project-tag">AR</span><span class="project-tag">Inclusión</span></div></div>
+        <div class="project-card"><div class="project-num">// ET-004</div><div class="project-img">🏆</div><div class="project-name">SkillBridge</div><div class="project-desc">Marketplace de microhabilidades donde expertos y aprendices se conectan para sesiones 1 a 1.</div><div class="project-tags"><span class="project-tag">Marketplace</span><span class="project-tag">Upskilling</span></div></div>
+        <div class="project-card"><div class="project-num">// ET-005</div><div class="project-img">🤖</div><div class="project-name">TutorBot</div><div class="project-desc">Tutor virtual con IA generativa que responde preguntas académicas con explicaciones adaptadas al nivel del alumno.</div><div class="project-tags"><span class="project-tag">GenAI</span><span class="project-tag">Tutor</span></div></div>
+      </div>
+      <div class="carousel-nav">
+        <button class="car-btn" onclick="scrollCar('carousel-edtech', -1)">←</button>
+        <button class="car-btn" onclick="scrollCar('carousel-edtech', 1)">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GreenTech -->
+  <div id="cat-greentech" class="categoria-section">
+    <div class="cat-title">GreenTech</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="carousel-greentech">
+        <div class="project-card"><div class="project-num">// GT-001</div><div class="project-img">☀️</div><div class="project-name">SolarGrid</div><div class="project-desc">Red de paneles solares comunitarios con sistema de distribución y compensación automática de energía.</div><div class="project-tags"><span class="project-tag">Energía</span><span class="project-tag">IoT</span></div></div>
+        <div class="project-card"><div class="project-num">// GT-002</div><div class="project-img">♻️</div><div class="project-name">ReciclaBot</div><div class="project-desc">Robot autónomo de clasificación de residuos sólidos para grandes industrias con precisión del 95%.</div><div class="project-tags"><span class="project-tag">Robótica</span><span class="project-tag">Ambiental</span></div></div>
+        <div class="project-card"><div class="project-num">// GT-003</div><div class="project-img">💧</div><div class="project-name">AquaSense</div><div class="project-desc">Sensores IoT para monitoreo en tiempo real de calidad del agua en fuentes hídricas rurales y urbanas.</div><div class="project-tags"><span class="project-tag">Agua</span><span class="project-tag">IoT</span></div></div>
+        <div class="project-card"><div class="project-num">// GT-004</div><div class="project-img">🌱</div><div class="project-name">AgriSmart</div><div class="project-desc">Plataforma de agricultura de precisión que optimiza el uso de agua y fertilizantes mediante drones y sensores.</div><div class="project-tags"><span class="project-tag">Agro</span><span class="project-tag">Drone</span></div></div>
+        <div class="project-card"><div class="project-num">// GT-005</div><div class="project-img">🌬️</div><div class="project-name">CarbonZero</div><div class="project-desc">Plataforma de mercado de carbono para empresas que quieren neutralizar su huella con proyectos locales.</div><div class="project-tags"><span class="project-tag">Carbono</span><span class="project-tag">ESG</span></div></div>
+      </div>
+      <div class="carousel-nav">
+        <button class="car-btn" onclick="scrollCar('carousel-greentech', -1)">←</button>
+        <button class="car-btn" onclick="scrollCar('carousel-greentech', 1)">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FinTech -->
+  <div id="cat-fintech" class="categoria-section">
+    <div class="cat-title">FinTech</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="carousel-fintech">
+        <div class="project-card"><div class="project-num">// FT-001</div><div class="project-img">💳</div><div class="project-name">Wallvy</div><div class="project-desc">Billetera digital para población no bancarizada con identidad verificada en blockchain y acceso a microcréditos.</div><div class="project-tags"><span class="project-tag">Blockchain</span><span class="project-tag">Inclusión</span></div></div>
+        <div class="project-card"><div class="project-num">// FT-002</div><div class="project-img">📊</div><div class="project-name">InvestIQ</div><div class="project-desc">Asesor de inversiones con IA que democratiza el acceso a portafolios inteligentes desde $10.000 COP.</div><div class="project-tags"><span class="project-tag">AI</span><span class="project-tag">Inversión</span></div></div>
+        <div class="project-card"><div class="project-num">// FT-003</div><div class="project-img">🔐</div><div class="project-name">PaySafe</div><div class="project-desc">Sistema antifraude en tiempo real para transacciones B2B usando análisis de comportamiento y ML.</div><div class="project-tags"><span class="project-tag">Seguridad</span><span class="project-tag">ML</span></div></div>
+        <div class="project-card"><div class="project-num">// FT-004</div><div class="project-img">🏦</div><div class="project-name">CreditoFlex</div><div class="project-desc">Score crediticio alternativo basado en datos no tradicionales para usuarios sin historial bancario.</div><div class="project-tags"><span class="project-tag">Score</span><span class="project-tag">Data</span></div></div>
+        <div class="project-card"><div class="project-num">// FT-005</div><div class="project-img">🌐</div><div class="project-name">RemitEx</div><div class="project-desc">Plataforma de remesas internacionales con tarifas mínimas y tasa de cambio en tiempo real sin intermediarios.</div><div class="project-tags"><span class="project-tag">DeFi</span><span class="project-tag">Cross-border</span></div></div>
+      </div>
+      <div class="carousel-nav">
+        <button class="car-btn" onclick="scrollCar('carousel-fintech', -1)">←</button>
+        <button class="car-btn" onclick="scrollCar('carousel-fintech', 1)">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smart Cities -->
+  <div id="cat-smartcities" class="categoria-section">
+    <div class="cat-title">Smart Cities</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="carousel-smartcities">
+        <div class="project-card"><div class="project-num">// SC-001</div><div class="project-img">🚦</div><div class="project-name">TrafficMind</div><div class="project-desc">Sistema de semáforos adaptativos con visión computacional que reduce tiempos de congestión hasta un 40%.</div><div class="project-tags"><span class="project-tag">Vision AI</span><span class="project-tag">Tráfico</span></div></div>
+        <div class="project-card"><div class="project-num">// SC-002</div><div class="project-img">🚌</div><div class="project-name">TransiTrack</div><div class="project-desc">App de transporte público en tiempo real con predicción de llegadas y sugerencias de rutas óptimas.</div><div class="project-tags"><span class="project-tag">Movilidad</span><span class="project-tag">Open Data</span></div></div>
+        <div class="project-card"><div class="project-num">// SC-003</div><div class="project-img">💡</div><div class="project-name">LumiGrid</div><div class="project-desc">Alumbrado público inteligente que ajusta intensidad según flujo peatonal y condiciones climáticas.</div><div class="project-tags"><span class="project-tag">IoT</span><span class="project-tag">Energía</span></div></div>
+        <div class="project-card"><div class="project-num">// SC-004</div><div class="project-img">🏙️</div><div class="project-name">CivikApp</div><div class="project-desc">Plataforma de participación ciudadana para reporte de problemas urbanos y seguimiento de respuesta institucional.</div><div class="project-tags"><span class="project-tag">GovTech</span><span class="project-tag">Civic</span></div></div>
+        <div class="project-card"><div class="project-num">// SC-005</div><div class="project-img">🗑️</div><div class="project-name">WasteOps</div><div class="project-desc">Optimización de rutas de recolección de basura en tiempo real usando datos de sensores en contenedores.</div><div class="project-tags"><span class="project-tag">Logistics</span><span class="project-tag">IoT</span></div></div>
+      </div>
+      <div class="carousel-nav">
+        <button class="car-btn" onclick="scrollCar('carousel-smartcities', -1)">←</button>
+        <button class="car-btn" onclick="scrollCar('carousel-smartcities', 1)">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALIADOS -->
+<section id="aliados">
+  <div class="section-label fade-up">04 // Aliados</div>
+  <h2 class="section-title fade-up">Quienes hacen <span style="color:var(--secondary)">posible</span> el evento</h2>
+  <p class="fade-up" style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);margin-bottom:2.5rem;letter-spacing:0.04em;">// Haz clic sobre cualquier aliado para activar</p>
+
+  <div id="aliados-scene">
+    <canvas id="fw-canvas"></canvas>
+    <div id="aliados-grid">
+      <div class="al-card" data-name="TechCorp"></div>
+      <div class="al-card" data-name="InnovaLab"></div>
+      <div class="al-card" data-name="FutureVC"></div>
+      <div class="al-card" data-name="DataBase"></div>
+      <div class="al-card" data-name="CloudPeak"></div>
+      <div class="al-card" data-name="NexGen"></div>
+      <div class="al-card" data-name="SeedFund"></div>
+      <div class="al-card" data-name="DevHub"></div>
+      <div class="al-card" data-name="StartupCol"></div>
+      <div class="al-card" data-name="TechMinistry"></div>
+      <div class="al-card" data-name="DigiAccel"></div>
+      <div class="al-card" data-name="BetaGroup"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#banner" class="nav-logo">MEDIA<span>SHOW</span></a>
+      <p>Media Show es el evento que conecta el ecosistema de innovación tecnológica, brindando visibilidad a los proyectos que transformarán el futuro.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Evento</h4>
+      <ul>
+        <li><a href="#about">Sobre nosotros</a></li>
+        <li><a href="#agenda">Agenda</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#aliados">Aliados</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categorías</h4>
+      <ul>
+        <li><a href="#">HealthTech</a></li>
+        <li><a href="#">EdTech</a></li>
+        <li><a href="#">GreenTech</a></li>
+        <li><a href="#">FinTech</a></li>
+        <li><a href="#">Smart Cities</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">hola@mediashow.co</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Twitter / X</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 <span>Media Show</span> — Todos los derechos reservados</div>
+    <div class="social-links">
+      <a href="#" class="social-link">ig</a>
+      <a href="#" class="social-link">li</a>
+      <a href="#" class="social-link">X</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#main-site -->
+
+<!-- BOTÓN PANEL EDITOR -->
+<button id="gui-toggle-btn" style="display:none;">⚙ EDITOR</button>
+
+<!-- DEV PANEL -->
+<div id="dev-panel">
+  <div id="dev-toggle" title="Panel de desarrollo">&#9881; DEV</div>
+  <div id="dev-body">
+    <div class="dev-title">// Panel de Desarrollo</div>
+    <div class="dev-row"><span class="dev-label">Vista actual</span><span id="dev-state">—</span></div>
+    <div class="dev-row"><span class="dev-label">Fecha evento</span><span id="dev-event-date">—</span></div>
+    <div class="dev-row"><span class="dev-label">Ahora</span><span id="dev-now">—</span></div>
+    <div class="dev-divider"></div>
+    <div class="dev-label" style="margin-bottom:.5rem">Simular vista</div>
+    <button class="dev-btn" id="dev-show-cs">&#8594; Coming Soon</button>
+    <button class="dev-btn" id="dev-show-landing">&#8594; Landing</button>
+    <div class="dev-divider"></div>
+    <div class="dev-label" style="margin-bottom:.4rem">Override fecha</div>
+    <input type="datetime-local" id="dev-date-input" class="dev-input" />
+    <button class="dev-btn" id="dev-apply-date" style="margin-top:.4rem">Aplicar fecha</button>
+    <button class="dev-btn" id="dev-reset-date" style="opacity:.6">Reset fecha real</button>
+  </div>
+</div>
+
+<style>
+  #dev-panel {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    z-index: 99999; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  }
+  #dev-toggle {
+    background: rgba(242,145,27,0.15); border: 1px solid rgba(242,145,27,0.4);
+    color: #F2911B; padding: 0.4rem 0.9rem; cursor: pointer;
+    text-align: right; letter-spacing: 0.1em; font-weight: 700;
+    user-select: none; transition: background 0.2s;
+  }
+  #dev-toggle:hover { background: rgba(242,145,27,0.3); }
+  #dev-body {
+    display: none; background: rgba(8,12,16,0.97);
+    border: 1px solid rgba(242,145,27,0.3); border-top: none;
+    padding: 1rem; width: 240px; backdrop-filter: blur(10px);
+  }
+  #dev-body.open { display: block; }
+  .dev-title { color: #F2911B; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.8rem; font-size: 0.6rem; }
+  .dev-row { display: flex; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.4rem; color: rgba(232,237,242,0.7); font-size: 0.6rem; }
+  .dev-label { color: rgba(4,191,191,0.7); font-size: 0.6rem; }
+  #dev-state { color: #F2911B; font-weight: 700; }
+  .dev-divider { height: 1px; background: rgba(4,191,191,0.1); margin: 0.8rem 0; }
+  .dev-btn {
+    display: block; width: 100%; background: rgba(4,191,191,0.08);
+    border: 1px solid rgba(4,191,191,0.2); color: #04BFBF;
+    padding: 0.45rem 0.6rem; cursor: pointer; letter-spacing: 0.08em;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    text-align: left; transition: all 0.15s; margin-bottom: 0.3rem;
+  }
+  .dev-btn:hover { background: rgba(4,191,191,0.2); color: #fff; }
+  .dev-input {
+    width: 100%; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(4,191,191,0.2); color: #E8EDF2;
+    padding: 0.4rem 0.5rem; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; outline: none; box-sizing: border-box;
+  }
+  .dev-input:focus { border-color: rgba(242,145,27,0.5); }
+</style>
+
+<!-- SCRIPTS -->
+<script src="js/agenda.js"></script>
+<script src="js/proyectos.js"></script>
+<script src="js/carousel.js"></script>
+<script src="js/tabs.js"></script>
+<script src="js/animations.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  /* Aplicar visibilidad de paneles */
+  if (typeof SHOW_DEV_PANEL !== 'undefined' && !SHOW_DEV_PANEL) {
+    var dp = document.getElementById('dev-panel');
+    if (dp) dp.style.display = 'none';
+  }
+  if (typeof SHOW_EDITOR_PANEL !== 'undefined' && SHOW_EDITOR_PANEL) {
+    var gb = document.getElementById('gui-toggle-btn');
+    if (gb) gb.style.display = 'block';
+  }
+});
+</script>
+
+<script src="js/coming-soon.js"></script>
+<script src="js/countdown.js"></script>
+
+<!-- PANEL EDITOR SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (typeof SHOW_EDITOR_PANEL !== 'undefined' && !SHOW_EDITOR_PANEL) return;
+
+  setTimeout(initEditorPanel, 1200);
+
+  function initEditorPanel() {
+    const GUI = (typeof lil !== 'undefined' && lil.GUI) ? lil.GUI : (typeof GUI !== 'undefined' ? GUI : window.lil?.GUI);
+    if (!GUI) { console.error('lil-gui no cargó correctamente'); return; }
+
+    const state = {
+      colorPrimario:   '#F2911B',
+      colorSecundario: '#04BFBF',
+      colorFondo:      '#080C10',
+      colorTexto:      '#E8EDF2',
+      heroLinea1: 'MEDIA', heroLinea2: 'SHOW', heroLinea3: '2026-1',
+      heroBadge:  '// En vivo · 2026 · Primer Semestre',
+      heroSub:    'El escenario donde proyectos disruptivos se encuentran con quienes tienen el poder de hacerlos realidad.',
+      stat1Num: '5', stat1Label: 'Categorías',
+      stat2Num: '40+', stat2Label: 'Proyectos',
+      stat3Num: '20+', stat3Label: 'Aliados',
+      stat4Num: '1K+', stat4Label: 'Asistentes',
+      navLogo: 'MEDIASHOW', navCTA: 'Inscríbete', navCTAUrl: '#',
+      nodos: 120, velocidad: 1.0, distanciaEdge: 10,
+      opacidadEdges: 0.35, mostrarAnillos: true,
+      mostrarNodos: true, mostrarEdges: true, tamanoNodos: 1.0,
+      badgeTexto: 'En vivo',
+      exportarHTML: function() { exportarHTML(); },
+      resetearTodo: function() { resetearTodo(); }
+    };
+
+    const gui = new GUI({ title: '// EDITOR MEDIASHOW', width: 280 });
+    gui.close();
+
+    const toggleBtn = document.getElementById('gui-toggle-btn');
+    toggleBtn.addEventListener('click', () => {
+      if (gui._closed) gui.open(); else gui.close();
+    });
+
+    const fColor = gui.addFolder('🎨 Colores del Sitio');
+    fColor.addColor(state, 'colorPrimario').name('Primario (naranja)').onChange(v => {
+      document.documentElement.style.setProperty('--primary', v);
+      document.documentElement.style.setProperty('--glow-orange', hexToRgba(v, 0.3));
+    });
+    fColor.addColor(state, 'colorSecundario').name('Secundario (teal)').onChange(v => {
+      document.documentElement.style.setProperty('--secondary', v);
+      document.documentElement.style.setProperty('--border', hexToRgba(v, 0.15));
+      document.documentElement.style.setProperty('--glow-teal', hexToRgba(v, 0.25));
+    });
+    fColor.addColor(state, 'colorFondo').name('Fondo').onChange(v => {
+      document.documentElement.style.setProperty('--bg', v);
+    });
+    fColor.addColor(state, 'colorTexto').name('Texto').onChange(v => {
+      document.documentElement.style.setProperty('--text', v);
+    });
+    fColor.close();
+
+    const fHero = gui.addFolder('🦸 Hero / Banner');
+    fHero.add(state, 'heroLinea1').name('Línea 1').onChange(v => { const el = document.querySelector('.hero-title .line1'); if (el) el.textContent = v; });
+    fHero.add(state, 'heroLinea2').name('Línea 2').onChange(v => { const el = document.querySelector('.hero-title .line2'); if (el) el.textContent = v; });
+    fHero.add(state, 'heroLinea3').name('Línea 3').onChange(v => { const el = document.querySelector('.hero-title .line3'); if (el) el.textContent = v; });
+    fHero.add(state, 'heroBadge').name('Badge').onChange(v => { const el = document.querySelector('.hero-badge'); if (el) el.textContent = v; });
+    fHero.add(state, 'heroSub').name('Subtítulo').onChange(v => { const el = document.querySelector('.hero-sub'); if (el) el.textContent = v; });
+    fHero.close();
+
+    const fStats = gui.addFolder('📊 Estadísticas Hero');
+    const statNums   = document.querySelectorAll('.stat-num');
+    const statLabels = document.querySelectorAll('.stat-label');
+    fStats.add(state, 'stat1Num').name('Stat 1 Número').onChange(v => { if(statNums[0]) statNums[0].textContent = v; });
+    fStats.add(state, 'stat1Label').name('Stat 1 Etiqueta').onChange(v => { if(statLabels[0]) statLabels[0].textContent = v; });
+    fStats.add(state, 'stat2Num').name('Stat 2 Número').onChange(v => { if(statNums[1]) statNums[1].textContent = v; });
+    fStats.add(state, 'stat2Label').name('Stat 2 Etiqueta').onChange(v => { if(statLabels[1]) statLabels[1].textContent = v; });
+    fStats.add(state, 'stat3Num').name('Stat 3 Número').onChange(v => { if(statNums[2]) statNums[2].textContent = v; });
+    fStats.add(state, 'stat3Label').name('Stat 3 Etiqueta').onChange(v => { if(statLabels[2]) statLabels[2].textContent = v; });
+    fStats.add(state, 'stat4Num').name('Stat 4 Número').onChange(v => { if(statNums[3]) statNums[3].textContent = v; });
+    fStats.add(state, 'stat4Label').name('Stat 4 Etiqueta').onChange(v => { if(statLabels[3]) statLabels[3].textContent = v; });
+    fStats.close();
+
+    const fNav = gui.addFolder('🧭 Navegación');
+    fNav.add(state, 'navCTA').name('Texto botón CTA').onChange(v => { const el = document.querySelector('.nav-cta'); if (el) el.textContent = v; });
+    fNav.add(state, 'navCTAUrl').name('URL botón CTA').onChange(v => { const el = document.querySelector('.nav-cta'); if (el) el.href = v; });
+    fNav.close();
+
+    const fThree = gui.addFolder('🌐 Animación 3D');
+    fThree.add(state, 'mostrarNodos').name('Mostrar nodos').onChange(v => { if (window._threeNodes) window._threeNodes.visible = v; });
+    fThree.add(state, 'mostrarEdges').name('Mostrar conexiones').onChange(v => { if (window._threeEdges) window._threeEdges.visible = v; });
+    fThree.add(state, 'mostrarAnillos').name('Mostrar anillos').onChange(v => {
+      if (window._threeRing1) window._threeRing1.visible = v;
+      if (window._threeRing2) window._threeRing2.visible = v;
+      if (window._threeRing3) window._threeRing3.visible = v;
+    });
+    fThree.add(state, 'opacidadEdges', 0, 1, 0.05).name('Opacidad conexiones').onChange(v => { if (window._threeEdgeMat) window._threeEdgeMat.opacity = v; });
+    fThree.add(state, 'velocidad', 0.1, 5, 0.1).name('Velocidad partículas').onChange(v => {
+      const vels = window._threeNodeVelocities;
+      if (!vels) return;
+      const factor = v / (state._lastVel || 1);
+      vels.forEach(vel => vel.multiplyScalar(factor));
+      state._lastVel = v;
+    });
+    fThree.add(state, 'tamanoNodos', 0.2, 3, 0.1).name('Tamaño nodos').onChange(v => {
+      const geo = window._threeNodeGeo;
+      if (!geo) return;
+      const sAttr = geo.getAttribute('size');
+      if (!sAttr) return;
+      for (let i = 0; i < sAttr.count; i++) {
+        sAttr.array[i] = sAttr.array[i] > 0 ? Math.max(0.2, sAttr.array[i] * v / (state._lastSize || 1)) : v;
+      }
+      sAttr.needsUpdate = true;
+      state._lastSize = v;
+    });
+    fThree.close();
+
+    const fFont = gui.addFolder('✏️ Tipografía');
+    const fontOpts = {
+      'Syne (actual)': "'Syne', sans-serif",
+      'Space Mono': "'Space Mono', monospace",
+      'JetBrains Mono': "'JetBrains Mono', monospace",
+      'Arial': 'Arial, sans-serif',
+      'Georgia': 'Georgia, serif',
+    };
+    const fontState = { fuente: 'Syne (actual)', tamaño: 100 };
+    fFont.add(fontState, 'fuente', Object.keys(fontOpts)).name('Fuente cuerpo').onChange(v => { document.body.style.fontFamily = fontOpts[v]; });
+    fFont.add(fontState, 'tamaño', 60, 140, 1).name('Escala hero (%)').onChange(v => {
+      const el = document.querySelector('.hero-title');
+      if (el) el.style.fontSize = `clamp(${2.1 * v/100}rem, ${5.4 * v/100}vw, ${4.8 * v/100}rem)`;
+    });
+    fFont.close();
+
+    const fBg = gui.addFolder('🌃 Fondo & Grid');
+    const bgState = { mostrarGrid: true, opacidadGrid: 0.04 };
+    fBg.add(bgState, 'mostrarGrid').name('Mostrar grid').onChange(v => {
+      const pseudo = document.getElementById('_grid_style') || (() => {
+        const s = document.createElement('style'); s.id = '_grid_style'; document.head.appendChild(s); return s;
+      })();
+      pseudo.textContent = v ? '' : 'body::before { opacity: 0 !important; }';
+    });
+    fBg.add(bgState, 'opacidadGrid', 0, 0.2, 0.01).name('Opacidad grid').onChange(v => {
+      const s = document.getElementById('_grid_style2') || (() => {
+        const s = document.createElement('style'); s.id = '_grid_style2'; document.head.appendChild(s); return s;
+      })();
+      s.textContent = `body::before { background-image: linear-gradient(rgba(4,191,191,${v}) 1px, transparent 1px), linear-gradient(90deg, rgba(4,191,191,${v}) 1px, transparent 1px) !important; }`;
+    });
+    fBg.close();
+
+    const fActions = gui.addFolder('💾 Acciones');
+    fActions.add(state, 'exportarHTML').name('⬇ Exportar HTML');
+    fActions.add(state, 'resetearTodo').name('↺ Resetear todo');
+    fActions.open();
+
+    function hexToRgba(hex, alpha) {
+      const r = parseInt(hex.slice(1,3),16);
+      const g = parseInt(hex.slice(3,5),16);
+      const b = parseInt(hex.slice(5,7),16);
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    function exportarHTML() {
+      const root = document.documentElement;
+      const computed = getComputedStyle(root);
+      const vars = ['--primary','--secondary','--bg','--bg2','--bg3','--text','--text-muted','--border','--glow-orange','--glow-teal'];
+      let overrides = ':root {\n';
+      vars.forEach(v => { overrides += `  ${v}: ${computed.getPropertyValue(v).trim()};\n`; });
+      overrides += '}';
+      const cloneDoc = document.documentElement.cloneNode(true);
+      const overrideStyle = document.createElement('style');
+      overrideStyle.id = '_export_overrides';
+      overrideStyle.textContent = overrides;
+      cloneDoc.querySelector('head').appendChild(overrideStyle);
+      const guiEl = cloneDoc.querySelector('.lil-gui');
+      if (guiEl) guiEl.remove();
+      const toggleBtnEl = cloneDoc.getElementById('gui-toggle-btn');
+      if (toggleBtnEl) toggleBtnEl.remove();
+      const htmlStr = '<!DOCTYPE html>\n<html lang="es">\n' + cloneDoc.innerHTML + '\n</html>';
+      const blob = new Blob([htmlStr], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'evento-tech-editado.html'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetearTodo() {
+      if (!confirm('¿Resetear todos los cambios visuales?')) return;
+      ['--primary','--secondary','--bg','--bg2','--bg3','--text','--text-muted','--border','--glow-orange','--glow-teal'].forEach(v => {
+        document.documentElement.style.removeProperty(v);
+      });
+      document.body.style.fontFamily = '';
+      const line1 = document.querySelector('.hero-title .line1');
+      const line2 = document.querySelector('.hero-title .line2');
+      const line3 = document.querySelector('.hero-title .line3');
+      if (line1) line1.textContent = 'MEDIA';
+      if (line2) line2.textContent = 'SHOW';
+      if (line3) line3.textContent = '2026-1';
+      if (window._threeNodes) window._threeNodes.visible = true;
+      if (window._threeEdges) window._threeEdges.visible = true;
+      if (window._threeRing1) window._threeRing1.visible = true;
+      if (window._threeRing2) window._threeRing2.visible = true;
+      if (window._threeRing3) window._threeRing3.visible = true;
+      if (window._threeEdgeMat) window._threeEdgeMat.opacity = 0.35;
+      ['_grid_style','_grid_style2'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.textContent = '';
+      });
+      gui.reset();
+    }
+
+    state._lastVel  = 1.0;
+    state._lastSize = 1.0;
+  }
+});
+</script>
+
+</body>
+</html>
