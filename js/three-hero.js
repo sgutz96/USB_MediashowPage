@@ -14,6 +14,7 @@
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 500);
   camera.position.set(0, 8, 32);
   camera.lookAt(0, 0, 0);
+  
 
   /* ══ COLORES ══ */
   const C_ORANGE  = new THREE.Color(0xF2911B);
